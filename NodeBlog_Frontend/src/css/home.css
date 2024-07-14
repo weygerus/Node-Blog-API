@@ -1,0 +1,89 @@
+
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.list-title{
+    font-size: 18px;
+}
+
+.HeaderContainer{
+    margin-bottom: 20px;
+}
+
+.btn-container{
+    margin-bottom: 10px;
+}
+
+.search-container{
+    margin-bottom: 10px;
+}
+
+.card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+
+    border-radius: 0.25rem;
+    margin-bottom: 30px;
+
+    padding: 0.8rem;
+    
+    max-width: 300px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card p {
+    margin: 0;
+}
+
+/* Card de mensagem */
+
+#messageText{
+    color: #fff
+}
+
+/* Sessão lista */
+
+.PostListContainer{
+    height: 200px;
+    width: 500px;
+}
+
+.listCard{
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+
+    padding-left: 20px;
+}
+
+.content{
+    max-width: 380px;
+    height: 100px;
+}
+
+@media screen and(max-width: 830px){
+
+    .listCard{
+        margin-left: 30px;
+        padding-left: 30px;
+    }
+}
+
+/* Action buttons container */
+
+.btnContainer {
+    display: flex;
+
+    margin-bottom: 15px;
+}
+
+.editBtn {
+    margin-right: 10px;
+    border-radius: 8px;
+}
+
+.deleteBtn {
+    border-radius: 8px;
+}
+
+

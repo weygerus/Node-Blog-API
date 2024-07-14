@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Cadastro de posts</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<!--===============================================================================================-->
+</head>
+
+<body>
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+
+				<form id="form" name="postagens" class="login100-form validate-form">
+
+					<span class="login100-form-title p-b-26">
+						Cadastro de posts
+					</span>
+
+					<div id="messageCard" class="card" style="display: none;">
+						<p id="messageText"></p>
+					</div>
+
+					<script>
+
+						
+						function getMessageParameter() {
+							const queryString = window.location.search;
+							const urlParams = new URLSearchParams(queryString);
+							return urlParams.get('message');
+						}
+
+						function exibirMensagemNoCard() {
+
+							const message = getMessageParameter()
+
+							console.log('teste erro:' + message)
+
+							if (message) {
+
+								const messageText = document.getElementById('messageText')
+								const messageCard = document.getElementById('messageCard')
+
+								const safeMessage = message.replace(/_/g, ' ')
+								messageCard.style.display = 'block'
+
+								messageText.innerText = safeMessage + '!'
+							}
+						}
+
+						exibirMensagemNoCard()
+
+					</script>
+
+					<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+						<input id="titulo" class="input100" type="text" name="data[titulo]">
+						<span class="focus-input100" data-placeholder="titulo"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+						<input id="slug" class="input100" type="text" name="data[slug]">
+						<span class="focus-input100" data-placeholder="slug"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+						<input id="descricao" class="input100" type="text" name="data[descricao]">
+						<span class="focus-input100" data-placeholder="descricao"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+						<input id="conteudo" class="input100" type="text" name="data[conteudo]">
+						<span class="focus-input100" data-placeholder="conteudo"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+						<input id="categoria" class="input100" type="text" name="data[categoria]">
+						<span class="focus-input100" data-placeholder="categoria"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								<input onclick="CreatePost()" type="button" value="Registrar postagem" id="BtnGravar"
+									class="submmit-button">
+							</button>
+						</div>
+					</div>
+
+					<style>
+						.submmit-button {
+							background-color: transparent;
+							color: #fff;
+						}
+					</style>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div id="dropDownSelect1"></div>
+
+	<script src="./script.js"></script>
+
+
+</body>
+
+</html>

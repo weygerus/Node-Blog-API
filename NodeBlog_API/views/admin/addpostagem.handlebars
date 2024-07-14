@@ -1,0 +1,65 @@
+
+{{#each erros}}
+    <div class="alert alert-danger">{{texto}}</div>
+{{/each}}
+
+<h2>Novo Post:</h2>
+<div class="card">
+    <div class="card-body">
+        <form action="/admin/postagens/nova" method="POST">
+
+            <label for="titulo"></label>
+            <input type="text" id="titulo" name="titulo" placeholder="Titulo" class="form-control">
+
+            <label for="slug"></label>
+            <input type="text" id="slug" name="slug" placeholder="Slug" class="form-control">
+
+            <label for="descricao"></label>
+            <input type="text" id="descricao" name="descricao" placeholder="Descrição" class="form-control">
+            
+            <label for="conteudo"></label>
+            <textarea id="conteudo" name="conteudo" placeholder="conteudo" class="form-control"></textarea>
+
+            <label for="categoria"></label>
+            <select name="categoria" id="categoria" class="form-control mt-1">
+                {{#each categorias}}
+                    <option value="{{_id}}">{{nome}}</option>
+                {{else}}
+                    <option value="0">Nenhuma categoria registrada!</option>
+                {{/each}}
+            </select>
+
+            <script>
+   /*             
+router.post('/categorias/edit', (req, res) => {
+    
+    Categoria.findOne({_id: req.body.id})
+    .then((categoria) =>{
+
+        categoria.nome = req.body.nome
+        categoria.slug = req.body.slug 
+
+        categoria.save().then(() => {
+            req.flash('success_msg', 'Categoria editada com sucesso!')
+            res.redirect('/admin/categorias')
+        })
+        .catch((err) => {
+            req.flash('error_msg', 'Houve um problema ao editar a categoria')
+            res.redirect('/admin/categorias')
+        })
+
+    })
+    .catch((err) => {
+        req.flash('error_msg', 'Houve um problema ao editar a categoria')
+        res.redirect('/admin/categorias')
+    })
+})
+*/
+            </script>
+
+            <br>
+
+            <button onclick="getCategoryId()"  class="btn btn-success mt-4">Criar post</button>
+        </form>
+    </div>
+</div>

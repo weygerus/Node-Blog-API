@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="css/home.css">
+</head>
+
+<body>
+
+    <section class="HeaderContainer">
+
+        <h2>Lista de publicações</h2>
+
+        <div class="btn-container">
+            <button onclick="CallPostRegister()" class="add-btn">Adicionar publicação</button>
+        </div>
+
+        <div class="search-container">
+            <input type="text" placeholder="Pesquise uma publicação">
+        </div>
+
+        <div id="messageCard" class="card" style="display: none;">
+            <p id="messageText"></p>
+        </div>
+
+        <script>
+            function getMessageParameter() {
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                return urlParams.get('message');
+            }
+
+            function getColorParameter() {
+                const queryString = window.location.search
+                const urlParams = new URLSearchParams(queryString)
+                return urlParams.get('color')
+            }
+
+            function exibirMensagemNoCard() {
+
+                const message = getMessageParameter()
+                const color = getColorParameter()
+                                
+                if (message) {
+
+                    const messageText = document.getElementById('messageText')
+                    const messageCard = document.getElementById('messageCard')
+
+                    const safeMessage = message.replace(/_/g, ' ')
+                    messageCard.style.display = 'block'
+
+                    messageText.innerText = safeMessage + '!'
+
+                    if (color == 'green') {
+                        messageCard.style.backgroundColor = '#28a745'
+                    }
+                    else if (color == 'red') {
+                        messageCard.style.backgroundColor = '#dc3545'
+                    }
+                }
+
+            }
+
+            exibirMensagemNoCard()
+
+        </script>
+
+    </section>
+    
+    <div class="PostListContainer" id="publicationsContainer">
+
+        
+    </div>
+
+    <script src="homePage.js"></script>
+</body>
+
+</html>

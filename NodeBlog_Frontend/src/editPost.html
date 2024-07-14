@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Edição de posts</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<!--===============================================================================================-->
+</head>
+
+<body>
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+
+				<form id="form" name="postagens" class="login100-form validate-form">
+
+					<span class="login100-form-title p-b-26">
+						Edite sua publicação
+					</span>
+
+					<div id="messageCard" class="card" style="display: none;">
+						<p id="messageText"></p>
+					</div>
+
+					<script>
+					</script>
+
+					<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+						<input id="titulo" class="input100" type="text" name="data[titulo]">
+						<span id="titleSpan" class="focus-input100" data-placeholder="titulo"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+						<input id="slug" class="input100" type="text" name="data[slug]">
+						<span id="slugSpan" class="focus-input100" data-placeholder="slug"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+						<input id="descricao" class="input100" type="text" name="data[descricao]">
+						<span id="describeSpan" class="focus-input100" data-placeholder="descricao"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+						<input id="conteudo" class="input100" type="text" name="data[conteudo]">
+						<span id="contentSpan" class="focus-input100" data-placeholder="conteudo"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+						<input id="categoria" class="input100" type="text" name="data[categoria]">
+						<span id="categorySpan" class="focus-input100" data-placeholder="categoria"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								<input onclick="editPost(postId)" type="button" value="Registrar postagem" id="BtnGravar"
+									class="submmit-button">
+							</button>
+						</div>
+					</div>
+
+					<style>
+						.submmit-button {
+							background-color: transparent;
+							color: #fff;
+						}
+					</style>
+
+					<script>
+
+						function getParameterId() {
+
+							const postId = window.location.search
+							const urlParams = new URLSearchParams(postId)
+							return urlParams.get('id')
+						}
+
+						async function getPostData(postId) {
+
+							const baseUrl = 
+								`http://localhost:3000/admin/postagens/getById/`
+
+								const response = await fetch(baseUrl + `${postId}`)
+
+								console.log('Teste de retorno da requisição: ', response)
+
+							if (response.ok) {
+
+								const publication = await response.json()
+
+								const publicationData = publication.data
+
+								const fillData = {
+
+									titulo: publicationData.titulo,
+									slug: publicationData.slug,
+									descricao: publicationData.descricao,
+									conteudo: publicationData.conteudo,
+									categoria: publicationData.categoria
+								}
+
+								const titleInput = document.getElementById('titulo')
+								const slugInput = document.getElementById('slug')
+								const descriptInput = document.getElementById('descricao')
+								const contentInput = document.getElementById('conteudo')
+								const categoryInput = document.getElementById('categoria')
+
+								const titleSpan = document.getElementById('titleSpan')
+								titleSpan.setAttribute('data-placeholder', '')
+								titleInput.value = fillData.titulo
+
+								const slugSpan = document.getElementById('slugSpan')
+								slugSpan.setAttribute('data-placeholder', '')
+								slugInput.value = fillData.slug
+
+								const describeSpan = document.getElementById('describeSpan')
+								describeSpan.setAttribute('data-placeholder', '')
+								descriptInput.value = fillData.descricao
+
+								const contentSpan = document.getElementById('contentSpan')
+								contentSpan.setAttribute('data-placeholder', '')
+								contentInput.value = fillData.conteudo
+
+								const getCategoryNameUrl = 
+										`http://localhost:3000/admin/categoryById/`
+
+								const categoryResponse = await fetch(getCategoryNameUrl + `${fillData.categoria}`)
+								
+								if (categoryResponse.ok) {
+
+									const category = await categoryResponse.json()
+
+									const categoryName = category.data.nome
+
+									const categorySpan = document.getElementById('categorySpan')
+									categorySpan.setAttribute('data-placeholder', '')
+									categoryInput.value = categoryName
+								}
+								else {
+									
+									console.log('Erro ao buscar nome da categoria!')
+
+									window.location.href = `home.html?message=Erro_ao_buscar_categoria_da_publicação&color=red`	
+								}
+							}
+						}
+
+						const postId = getParameterId()
+
+						getPostData(postId)
+					</script>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div id="dropDownSelect1"></div>
+
+	<script src="./script.js"></script>
+
+
+</body>
+
+</html>
